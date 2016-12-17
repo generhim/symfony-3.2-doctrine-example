@@ -147,7 +147,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
             Created database `doctrine_eg_db` for connection named default
 
 
-#6A. To drop and refresh the database do the following:
+##6A. To drop and refresh the database do the following:
 source: http://symfony.com/doc/3.1/doctrine.html
 
         php bin/console doctrine:database:drop --force
@@ -165,7 +165,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 #7. Creating Entity Classes.
 source: http://symfony.com/doc/3.1/doctrine.html
 
-7A.) Create a directory in your src/{bundle name}/ directory.
+##7A.) Create a directory in your src/{bundle name}/ directory.
 source: http://symfony.com/doc/3.1/doctrine.html
 
     It should be on the same level as your Controllers
@@ -176,7 +176,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
         EXAMPLE:
         /src/AppBundle/Entity
 
-7B.) Create your entities like the one in /src/AppBundle/Entity/User.php
+##7B.) Create your entities like the one in /src/AppBundle/Entity/User.php
 source: http://symfony.com/doc/3.1/doctrine.html
 
         NOTE: The file should begin with capitalization. So in this case, we save the file as User.php, NOT user.php.
@@ -202,7 +202,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
         /* EOF */
 
 
-7C.) Use interactive mode to create entities:
+##7C.) Use interactive mode to create entities:
 source: http://symfony.com/doc/3.1/doctrine.html
 
         NOTE: When using it three (3) files will be created:
@@ -550,10 +550,10 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 
-8.) Make certain that each Entity class is using Doctrine\ORM\Mapping as ORM.
+#8.) Make certain that each Entity class is using Doctrine\ORM\Mapping as ORM.
 source: http://symfony.com/doc/3.1/doctrine.html
 
-    8A.) EXAMPLE:
+8A.) EXAMPLE:
 
                 <?php // src/AppBundle/Entity/Account.php
 
@@ -569,7 +569,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 
-    8B.) Modify the Entity class you created in order to reference the database table and its columns.
+8B.) Modify the Entity class you created in order to reference the database table and its columns.
         This is done via metadata within the DocBlock annotations:
 
             EXAMPLE 8Bi.) In the /src/AppBundle/Entity/Account.php file, switch out default reference to Account (LINE 5-7) with:
@@ -613,7 +613,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 #10.) Create the database tables/schema
 source: http://symfony.com/doc/3.1/doctrine.html
 
-    10A.) IMPORTANT! Before running the command line tool first make certain that the bundle is being referenced in the config.yml file.
+10A.) IMPORTANT! Before running the command line tool first make certain that the bundle is being referenced in the config.yml file.
           source: http://stackoverflow.com/questions/22267998/symfony2-no-metadata-classes-to-process
 
           The issue is that unless we specify the mapping for the bundle, Doctrine will not be able to find the meta data.
