@@ -1,7 +1,10 @@
-# symfony_doctrine_eg (for MySQL and MongoDB)
-# https://symfony.com/doc/current/doctrine.html#main
-# https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
-# http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html
+#symfony_doctrine_eg (for MySQL and MongoDB)
+A simple Symfony project showing Doctrine ORM setup.
+
+## Reference:
+https://symfony.com/doc/current/doctrine.html#main
+https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/query-builder.html
 
 A Symfony project created on December 13, 2016, 8:50 pm.
 
