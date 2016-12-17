@@ -61,6 +61,8 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 #5. Make certain that your mysql configuration is setup to create databases with a default of utf8, not latin type collations.
+source: http://symfony.com/doc/3.1/doctrine.html
+
     On Mac, there might not be a my.cnf file. So go to: /usr/local/mysql/support-files/ in order to checkout the examples.
 
     vim /usr/local/mysql/support-files/my-default.cnf
@@ -104,13 +106,14 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
              sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
 
-    #5A. In System Preferences if you have MySQL Server Status installed you can simply restart the MySQL server.
+#5A. In System Preferences if you have MySQL Server Status installed you can simply restart the MySQL server.
+source: http://symfony.com/doc/3.1/doctrine.html
 
-    #5B. Update the app/config/config.yml so doctrine is using the correct charset.
-    source: http://symfony.com/doc/3.1/doctrine.html
+#5B. Update the app/config/config.yml so doctrine is using the correct charset.
+source: http://symfony.com/doc/3.1/doctrine.html
 
-        NOTE:   The people at Symfony recommend against MySQL's utf8 character set, since it does not support 4-byte unicode
-                characters, and strings containing them will be truncated. This is fixed by the newer utf8mb4 character set.
+    NOTE:   The people at Symfony recommend against MySQL's utf8 character set, since it does not support 4-byte unicode
+            characters, and strings containing them will be truncated. This is fixed by the newer utf8mb4 character set.
 
 
         #app/config/config.yml
@@ -132,7 +135,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 #6. Create the new databse.
-    source: http://symfony.com/doc/3.1/doctrine.html
+source: http://symfony.com/doc/3.1/doctrine.html
 
         After setting up the database information in doctrine we can use the following command line to generate the database.
 
@@ -144,8 +147,8 @@ source: http://symfony.com/doc/3.1/doctrine.html
             Created database `doctrine_eg_db` for connection named default
 
 
-    #6A. To drop and refresh the database do the following:
-    source: http://symfony.com/doc/3.1/doctrine.html
+#6A. To drop and refresh the database do the following:
+source: http://symfony.com/doc/3.1/doctrine.html
 
         php bin/console doctrine:database:drop --force
         php bin/console doctrine:database:create
@@ -160,17 +163,22 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 #7. Creating Entity Classes.
-    source: http://symfony.com/doc/3.1/doctrine.html
+source: http://symfony.com/doc/3.1/doctrine.html
 
-    7A.) Create a directory in your src/{bundle name}/ directory. It should be on the same level as your Controllers
-        directory. Inside this directory you will be creating the entities that will represent the tables in your database.
-        These entities are data classes that are created to represent tables within the database and hold the information
-        (as well as getters and setters) in order to provide the db information as needed.
+7A.) Create a directory in your src/{bundle name}/ directory.
+source: http://symfony.com/doc/3.1/doctrine.html
+
+    It should be on the same level as your Controllers
+    directory. Inside this directory you will be creating the entities that will represent the tables in your database.
+    These entities are data classes that are created to represent tables within the database and hold the information
+    (as well as getters and setters) in order to provide the db information as needed.
 
         EXAMPLE:
         /src/AppBundle/Entity
 
-    7B.) Create your entities like the one in /src/AppBundle/Entity/User.php
+7B.) Create your entities like the one in /src/AppBundle/Entity/User.php
+source: http://symfony.com/doc/3.1/doctrine.html
+
         NOTE: The file should begin with capitalization. So in this case, we save the file as User.php, NOT user.php.
 
         EXAMPLE:
@@ -194,7 +202,9 @@ source: http://symfony.com/doc/3.1/doctrine.html
         /* EOF */
 
 
-    7C.) Use interactive mode to create entities:
+7C.) Use interactive mode to create entities:
+source: http://symfony.com/doc/3.1/doctrine.html
+
         NOTE: When using it three (3) files will be created:
             1.) The User.php data class file.
             2.) The User.orm.php file.
@@ -541,8 +551,9 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 8.) Make certain that each Entity class is using Doctrine\ORM\Mapping as ORM.
+source: http://symfony.com/doc/3.1/doctrine.html
 
-        8A.) EXAMPLE:
+    8A.) EXAMPLE:
 
                 <?php // src/AppBundle/Entity/Account.php
 
@@ -558,7 +569,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 
-        8B.) Modify the Entity class you created in order to reference the database table and its columns.
+    8B.) Modify the Entity class you created in order to reference the database table and its columns.
         This is done via metadata within the DocBlock annotations:
 
             EXAMPLE 8Bi.) In the /src/AppBundle/Entity/Account.php file, switch out default reference to Account (LINE 5-7) with:
@@ -589,7 +600,8 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 
-9.) Optionally, generate the entities of a bundle, or for a particular namespace:
+#9.) Optionally, generate the entities of a bundle, or for a particular namespace:
+source: http://symfony.com/doc/3.1/doctrine.html
 
          EXAMPLE 9A.) Generate all entities in the AppBundle
          php bin/console doctrine:generate:entities AppBundle
@@ -598,8 +610,8 @@ source: http://symfony.com/doc/3.1/doctrine.html
          php bin/console doctrine:generate:entities Acme
 
 
-10.) Create the database tables/schema
-
+#10.) Create the database tables/schema
+source: http://symfony.com/doc/3.1/doctrine.html
 
     10A.) IMPORTANT! Before running the command line tool first make certain that the bundle is being referenced in the config.yml file.
           source: http://stackoverflow.com/questions/22267998/symfony2-no-metadata-classes-to-process
@@ -632,24 +644,24 @@ source: http://symfony.com/doc/3.1/doctrine.html
                               alias: AppBundle
 
 
-    10B.) Afterwards we can run the following command.
+10B.) Afterwards we can run the following command.
+source: http://symfony.com/doc/3.1/doctrine.html
 
-        COMMAND LINE EXAMPLE:
+    COMMAND LINE EXAMPLE:
 
-            php bin/console doctrine:schema:update --force
+        php bin/console doctrine:schema:update --force
 
-        EXAMPLE OUTPUT:
+    EXAMPLE OUTPUT:
 
-                $ php bin/console doctrine:schema:update --force
-                Updating database schema...
-                Database schema updated successfully! "1" query was executed
+        $ php bin/console doctrine:schema:update --force
+        Updating database schema...
+        Database schema updated successfully! "1" query was executed
 
 
 
 WHEN IN DOUBT:
-
-    1.) If you get errors like:
-        No route found for "GET /"
+#1.) If you get errors like:
+     No route found for "GET /"
 
 
         COMMAND LINE:
@@ -663,7 +675,7 @@ WHEN IN DOUBT:
         php bin/console server:run
 
 
-    2.) RE: ANNOTATION
+#2.) RE: ANNOTATION
         The AppBundle:Product string is a shortcut you
         can use anywhere in Doctrine instead of the full
         class name of the entity (i.e. AppBundle\Entity\Product).
