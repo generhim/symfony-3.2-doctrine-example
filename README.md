@@ -48,7 +48,7 @@ Within the parameters YAML file add the following parameters:
 
 
 ##NOTE #1: In the Symfony documentation it only lists four out of the necessary parameters needed for the database.
-             You should use all ten (10) parameters in order for the php command line to work.
+You should use all ten (10) parameters in order for the php command line to work.
 ##NOTE #2: The parameter information will be referenced in app/config/config.yml
 
     # app/config/config.yml
@@ -140,19 +140,19 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 After setting up the database information in doctrine we can use the following command line to generate the database.
 
-    php bin/console doctrine:database:create
+    $ php bin/console doctrine:database:create
 
 ##COMMAND LINE EXAMPLE:
 
-        $ php bin/console doctrine:database:create
-        Created database `doctrine_eg_db` for connection named default
+    $ php bin/console doctrine:database:create
+    Created database `doctrine_eg_db` for connection named default
 
 
 ##6A. To drop and refresh the database do the following:
 source: http://symfony.com/doc/3.1/doctrine.html
 
-        php bin/console doctrine:database:drop --force
-        php bin/console doctrine:database:create
+    $ php bin/console doctrine:database:drop --force
+    $ php bin/console doctrine:database:create
 
 ##COMMAND LINE EXAMPLE:
 
@@ -208,397 +208,399 @@ source: http://symfony.com/doc/3.1/doctrine.html
 source: http://symfony.com/doc/3.1/doctrine.html
 
 ###NOTE: When using it three (3) files will be created:
-            1.) The User.php data class file.
-            2.) The User.orm.php file.
-            3.) The UserRepository.php file.
+    1.) The User.php data class file.
+    2.) The User.orm.php file.
+    3.) The UserRepository.php file.
 
 
 ###COMMAND LINE:
-            php bin/console doctrine:generate:entity
+    $ php bin/console doctrine:generate:entity
 
 
 ####EXAMPLE 7Ci OUTPUT:
 
-            $ php bin/console doctrine:generate:entity
+    $ php bin/console doctrine:generate:entity
 
-            Welcome to the Doctrine2 entity generator
-            This command helps you generate Doctrine2 entities.
+    Welcome to the Doctrine2 entity generator
+    This command helps you generate Doctrine2 entities.
 
-            First, you need to give the entity name you want to generate.
-            The Entity shortcut name: AppBundle:Account
+    First, you need to give the entity name you want to generate.
+    The Entity shortcut name: AppBundle:Account
 
-            Determine the format to use for the mapping information.
-            Configuration format (yml, xml, php, or annotation) [annotation]: php
+    Determine the format to use for the mapping information.
+    Configuration format (yml, xml, php, or annotation) [annotation]: php
 
-            Instead of starting with a blank entity, you can add some fields now.
-            Note that the primary key will be added automatically (named id).
+    Instead of starting with a blank entity, you can add some fields now.
+    Note that the primary key will be added automatically (named id).
 
-            Available types: array, simple_array, json_array, object,
-            boolean, integer, smallint, bigint, string, text, datetime, datetimetz,
-            date, time, decimal, float, binary, blob, guid.
+    Available types: array, simple_array, json_array, object,
+    boolean, integer, smallint, bigint, string, text, datetime, datetimetz,
+    date, time, decimal, float, binary, blob, guid.
 
-            New field name (press <return> to stop adding fields):
+    New field name (press <return> to stop adding fields):
 
-              created ./src/AppBundle/Entity/Account.php
-              created ./src/AppBundle/Resources/config/doctrine/Account.orm.php
-            > Generating entity class src/AppBundle/Entity/Account.php: OK!
-            > Generating repository class src/AppBundle/Repository/AccountRepository.php: OK!
-            > Generating mapping file src/AppBundle/Resources/config/doctrine/Account.orm.php: OK!
+     created ./src/AppBundle/Entity/Account.php
+     created ./src/AppBundle/Resources/config/doctrine/Account.orm.php
+     > Generating entity class src/AppBundle/Entity/Account.php: OK!
+     > Generating repository class src/AppBundle/Repository/AccountRepository.php: OK!
+     > Generating mapping file src/AppBundle/Resources/config/doctrine/Account.orm.php: OK!
 
 ####EXAMPLE 7Cii OUTPUT: Account.php
 
-                <?php
+     <?php // src/AppBundle/Entity/Account.php
 
-                namespace AppBundle\Entity;
+     namespace AppBundle\Entity;
 
-                use Doctrine\ORM\Mapping as ORM;
+     use Doctrine\ORM\Mapping as ORM;
 
-                /**
-                 * Account
-                 */
-                class Account
-                {
-                    /**
-                     * @var int
-                     */
-                    private $id;
+     /**
+      * @ORM\Entity
+      * @ORM\Table(name="account")
+      */
+     class Account
+     {
+         /**
+          * @ORM\Column(type="integer")
+          * @ORM\Id
+          * @ORM\GeneratedValue(strategy="AUTO")
+          */
+         private $id;
 
-                    /**
-                     * @var string
-                     */
-                    private $firstName;
+         /**
+          * @ORM\Column(type="string", length=100)
+          */
+         private $firstName;
 
-                    /**
-                     * @var string
-                     */
-                    private $lastName;
+         /**
+          * @ORM\Column(type="string", length=100)
+          */
+         private $lastName;
 
-                    /**
-                     * @var string
-                     */
-                    private $emailAddress;
+         /**
+          * @ORM\Column(type="string", length=100)
+          */
+         private $emailAddress;
 
-                    /**
-                     * @var string
-                     */
-                    private $accountPassword;
+         /**
+          * @ORM\Column(type="string", length=100)
+          */
+         private $accountPassword;
 
-                    /**
-                     * @var \DateTime
-                     */
-                    private $createDate;
+         /**
+          * @ORM\Column(type="datetime", name="create_date")
+          */
+         private $createDate;
 
-                    /**
-                     * @var \DateTime
-                     */
-                    private $modifiedDate;
+         /**
+          * @ORM\Column(type="datetime", name="modifed_date")
+          */
+         private $modifiedDate;
 
-                    /**
-                     * @var int
-                     */
-                    private $accountStatus;
+         /**
+          * @ORM\Column(type="integer", name="account_status", length=1)
+          */
+         private $accountStatus;
 
 
-                    /**
-                     * Get id
-                     *
-                     * @return int
-                     */
-                    public function getId()
-                    {
-                        return $this->id;
-                    }
+         /**
+          * Get id
+          *
+          * @return int
+          */
+         public function getId()
+         {
+             return $this->id;
+         }
 
-                    /**
-                     * Set firstName
-                     *
-                     * @param string $firstName
-                     *
-                     * @return Account
-                     */
-                    public function setFirstName($firstName)
-                    {
-                        $this->firstName = $firstName;
+         /**
+          * Set firstName
+          *
+          * @param string $firstName
+          *
+          * @return Account
+          */
+         public function setFirstName($firstName)
+         {
+             $this->firstName = $firstName;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get firstName
-                     *
-                     * @return string
-                     */
-                    public function getFirstName()
-                    {
-                        return $this->firstName;
-                    }
+         /**
+          * Get firstName
+          *
+          * @return string
+          */
+         public function getFirstName()
+         {
+             return $this->firstName;
+         }
 
-                    /**
-                     * Set lastName
-                     *
-                     * @param string $lastName
-                     *
-                     * @return Account
-                     */
-                    public function setLastName($lastName)
-                    {
-                        $this->lastName = $lastName;
+         /**
+          * Set lastName
+          *
+          * @param string $lastName
+          *
+          * @return Account
+          */
+         public function setLastName($lastName)
+         {
+             $this->lastName = $lastName;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get lastName
-                     *
-                     * @return string
-                     */
-                    public function getLastName()
-                    {
-                        return $this->lastName;
-                    }
+         /**
+          * Get lastName
+          *
+          * @return string
+          */
+         public function getLastName()
+         {
+             return $this->lastName;
+         }
 
-                    /**
-                     * Set emailAddress
-                     *
-                     * @param string $emailAddress
-                     *
-                     * @return Account
-                     */
-                    public function setEmailAddress($emailAddress)
-                    {
-                        $this->emailAddress = $emailAddress;
+         /**
+          * Set emailAddress
+          *
+          * @param string $emailAddress
+          *
+          * @return Account
+          */
+         public function setEmailAddress($emailAddress)
+         {
+             $this->emailAddress = $emailAddress;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get emailAddress
-                     *
-                     * @return string
-                     */
-                    public function getEmailAddress()
-                    {
-                        return $this->emailAddress;
-                    }
+         /**
+          * Get emailAddress
+          *
+          * @return string
+          */
+         public function getEmailAddress()
+         {
+             return $this->emailAddress;
+         }
 
-                    /**
-                     * Set accountPassword
-                     *
-                     * @param string $accountPassword
-                     *
-                     * @return Account
-                     */
-                    public function setAccountPassword($accountPassword)
-                    {
-                        $this->accountPassword = $accountPassword;
+         /**
+          * Set accountPassword
+          *
+          * @param string $accountPassword
+          *
+          * @return Account
+          */
+         public function setAccountPassword($accountPassword)
+         {
+             $this->accountPassword = $accountPassword;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get accountPassword
-                     *
-                     * @return string
-                     */
-                    public function getAccountPassword()
-                    {
-                        return $this->accountPassword;
-                    }
+         /**
+          * Get accountPassword
+          *
+          * @return string
+          */
+         public function getAccountPassword()
+         {
+             return $this->accountPassword;
+         }
 
-                    /**
-                     * Set createDate
-                     *
-                     * @param \DateTime $createDate
-                     *
-                     * @return Account
-                     */
-                    public function setCreateDate($createDate)
-                    {
-                        $this->createDate = $createDate;
+         /**
+          * Set createDate
+          *
+          * @param \DateTime $createDate
+          *
+          * @return Account
+          */
+         public function setCreateDate($createDate)
+         {
+             $this->createDate = $createDate;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get createDate
-                     *
-                     * @return \DateTime
-                     */
-                    public function getCreateDate()
-                    {
-                        return $this->createDate;
-                    }
+         /**
+          * Get createDate
+          *
+          * @return \DateTime
+          */
+         public function getCreateDate()
+         {
+             return $this->createDate;
+         }
 
-                    /**
-                     * Set modifiedDate
-                     *
-                     * @param \DateTime $modifiedDate
-                     *
-                     * @return Account
-                     */
-                    public function setModifiedDate($modifiedDate)
-                    {
-                        $this->modifiedDate = $modifiedDate;
+         /**
+          * Set modifiedDate
+          *
+          * @param \DateTime $modifiedDate
+          *
+          * @return Account
+          */
+         public function setModifiedDate($modifiedDate)
+         {
+             $this->modifiedDate = $modifiedDate;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get modifiedDate
-                     *
-                     * @return \DateTime
-                     */
-                    public function getModifiedDate()
-                    {
-                        return $this->modifiedDate;
-                    }
+         /**
+          * Get modifiedDate
+          *
+          * @return \DateTime
+          */
+         public function getModifiedDate()
+         {
+             return $this->modifiedDate->format('Y-m-d H:i:s');
+         }
 
-                    /**
-                     * Set accountStatus
-                     *
-                     * @param integer $accountStatus
-                     *
-                     * @return Account
-                     */
-                    public function setAccountStatus($accountStatus)
-                    {
-                        $this->accountStatus = $accountStatus;
+         /**
+          * Set accountStatus
+          *
+          * @param integer $accountStatus
+          *
+          * @return Account
+          */
+         public function setAccountStatus($accountStatus)
+         {
+             $this->accountStatus = $accountStatus;
 
-                        return $this;
-                    }
+             return $this;
+         }
 
-                    /**
-                     * Get accountStatus
-                     *
-                     * @return int
-                     */
-                    public function getAccountStatus()
-                    {
-                        return $this->accountStatus;
-                    }
-                }
+         /**
+          * Get accountStatus
+          *
+          * @return int
+          */
+         public function getAccountStatus()
+         {
+             return $this->accountStatus;
+         }
+
+
+     }
 
 ####EXAMPLE 7Ciii OUTPUT: Account.orm.php
 
-            <?php
+    <?php
 
-            use Doctrine\ORM\Mapping\ClassMetadataInfo;
+    use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-            $metadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_NONE);
-            $metadata->customRepositoryClassName = 'AppBundle\Repository\AccountRepository';
-            $metadata->setChangeTrackingPolicy(ClassMetadataInfo::CHANGETRACKING_DEFERRED_IMPLICIT);
-            $metadata->mapField(array(
-               'fieldName' => 'id',
-               'type' => 'integer',
-               'id' => true,
-               'columnName' => 'id',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'firstName',
-               'fieldName' => 'firstName',
-               'type' => 'string',
-               'length' => '100',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'lastName',
-               'fieldName' => 'lastName',
-               'type' => 'string',
-               'length' => '100',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'emailAddress',
-               'fieldName' => 'emailAddress',
-               'type' => 'string',
-               'length' => '100',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'accountPassword',
-               'fieldName' => 'accountPassword',
-               'type' => 'string',
-               'length' => '100',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'createDate',
-               'fieldName' => 'createDate',
-               'type' => 'datetime',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'modifiedDate',
-               'fieldName' => 'modifiedDate',
-               'type' => 'datetime',
-              ));
-            $metadata->mapField(array(
-               'columnName' => 'accountStatus',
-               'fieldName' => 'accountStatus',
-               'type' => 'integer',
-              ));
-            $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
+    $metadata->setInheritanceType(ClassMetadataInfo::INHERITANCE_TYPE_NONE);
+    $metadata->customRepositoryClassName = 'AppBundle\Repository\AccountRepository';
+    $metadata->setChangeTrackingPolicy(ClassMetadataInfo::CHANGETRACKING_DEFERRED_IMPLICIT);
+    $metadata->mapField(array(
+       'fieldName' => 'id',
+       'type' => 'integer',
+       'id' => true,
+       'columnName' => 'id',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'firstName',
+       'fieldName' => 'firstName',
+       'type' => 'string',
+       'length' => '100',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'lastName',
+       'fieldName' => 'lastName',
+       'type' => 'string',
+       'length' => '100',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'emailAddress',
+       'fieldName' => 'emailAddress',
+       'type' => 'string',
+       'length' => '100',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'accountPassword',
+       'fieldName' => 'accountPassword',
+       'type' => 'string',
+       'length' => '100',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'createDate',
+       'fieldName' => 'createDate',
+       'type' => 'datetime',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'modifiedDate',
+       'fieldName' => 'modifiedDate',
+       'type' => 'datetime',
+      ));
+    $metadata->mapField(array(
+       'columnName' => 'accountStatus',
+       'fieldName' => 'accountStatus',
+       'type' => 'integer',
+      ));
+    $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
 
-####EXAMPLE 7Civ OUTPUT: UserRepository.php
+####EXAMPLE 7Civ OUTPUT: AccountRepository.php
 
-            <?php
+    <?php
 
-            namespace AppBundle\Repository;
+    namespace AppBundle\Repository;
 
-            /**
-             * AccountRepository
-             *
-             * This class was generated by the Doctrine ORM. Add your own custom
-             * repository methods below.
-             */
-            class AccountRepository extends \Doctrine\ORM\EntityRepository
-            {
-            }
-
-
+    /**
+     * AccountRepository
+     *
+     * This class was generated by the Doctrine ORM. Add your own custom
+     * repository methods below.
+     */
+    class AccountRepository extends \Doctrine\ORM\EntityRepository
+    {
+    }
 
 #8.) Make certain that each Entity class is using Doctrine\ORM\Mapping as ORM.
 source: http://symfony.com/doc/3.1/doctrine.html
 
 ##8A.) EXAMPLE:
 
-                <?php // src/AppBundle/Entity/Account.php
+    <?php // src/AppBundle/Entity/Account.php
 
-                namespace AppBundle\Entity;
+    namespace AppBundle\Entity;
 
-                use Doctrine\ORM\Mapping as ORM;
+    use Doctrine\ORM\Mapping as ORM;
 
-                /**
-                 * @ORM\Entity
-                 * @ORM\Table(name="account")
-                 */
-                class Account
-
+    /**
+    * @ORM\Entity
+    * @ORM\Table(name="account")
+    */
+    class Account
+    ...
 
 
 ##8B.) Modify the Entity class you created in order to reference the database table and its columns.
         This is done via metadata within the DocBlock annotations:
 
-            EXAMPLE 8Bi.) In the /src/AppBundle/Entity/Account.php file, switch out default reference to Account (LINE 5-7) with:
+###EXAMPLE 8Bi.) In the /src/AppBundle/Entity/Account.php file, switch out default reference to Account (LINE 5-7) with:
 
-                    /**
-                     * @ORM\Entity
-                     * @ORM\Table(name="account")
-                     */
+    /**
+    * @ORM\Entity
+    * @ORM\Table(name="account")
+    */
 
-                NOTE:   This change is optional.Doctrine will use the class name as the database table if this change is not
-                        included.
+####NOTE:   This change is optional.Doctrine will use the class name as the database table if this change is not included.
 
-            EXAMPLE 8Bii.) In the same file name corrections per property to eference the correct column name and attributes.
-            Replace:
-                /**
-                 * @var int
-                 */
+###EXAMPLE 8Bii.) In the same file name corrections per property to eference the correct column name and attributes.
+####Replace:
+    /**
+    * @var int
+    */
 
-            With:
-                /**
-                 * @ORM\Column(type="integer")
-                 * @ORM\Id
-                 * @ORM\GeneratedValue(strategy="AUTO")
-                 */
+####With:
+    /**
+    * @ORM\Column(type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
 
-            NOTE: Reference Doctrine's guidelines for this to edit all of the different columns.
-                    http://symfony.com/doc/3.1/doctrine.html#doctrine-field-types
+####NOTE: Reference Doctrine's guidelines for this to edit all of the different columns.
+source: http://symfony.com/doc/3.1/doctrine.html#doctrine-field-types
 
 
 
@@ -607,11 +609,11 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 ##EXAMPLE 9A.) Generate all entities in the AppBundle
 
-    php bin/console doctrine:generate:entities AppBundle
+    $ php bin/console doctrine:generate:entities AppBundle
 
 ##EXAMPLE 9B.) Generate all entities of bundles in the Acme namespace.
 
-    php bin/console doctrine:generate:entities Acme
+    $ php bin/console doctrine:generate:entities Acme
 
 
 #10.) Create the database tables/schema
@@ -620,7 +622,7 @@ source: http://symfony.com/doc/3.1/doctrine.html
 ##10A.) IMPORTANT! Before running the command line tool first make certain that the bundle is being referenced in the config.yml file.
 source: http://stackoverflow.com/questions/22267998/symfony2-no-metadata-classes-to-process
 
-    The issue is that unless we specify the mapping for the bundle, Doctrine will not be able to find the meta data.
+The issue is that unless we specify the mapping for the bundle, Doctrine will not be able to find the meta data.
 
 ###CHANGE FROM:
 
@@ -677,7 +679,7 @@ No route found for "GET /"
         2.) Make certain the route is set.
 
             php bin/console router:debug
-        php bin/console server:run
+            php bin/console server:run
 
 
 ##2.) RE: ANNOTATION
