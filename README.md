@@ -659,8 +659,8 @@ source: http://symfony.com/doc/3.1/doctrine.html
 
 
 
-WHEN IN DOUBT:
-#1.) If you get errors like:
+#WHEN IN DOUBT:
+    #1.) If you get errors like:
      No route found for "GET /"
 
 
@@ -675,7 +675,7 @@ WHEN IN DOUBT:
         php bin/console server:run
 
 
-#2.) RE: ANNOTATION
+    #2.) RE: ANNOTATION
         The AppBundle:Product string is a shortcut you
         can use anywhere in Doctrine instead of the full
         class name of the entity (i.e. AppBundle\Entity\Product).
