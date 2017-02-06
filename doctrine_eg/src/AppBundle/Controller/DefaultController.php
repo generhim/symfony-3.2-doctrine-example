@@ -41,8 +41,40 @@ class DefaultController extends Controller
         // perform the insert.
         $entityManager->flush();
 
+        $header_text = $this->retrieve_header();
+        $purpose = "<br/><br/>The purpose of this controller method, indexAction, is to <ol><li>Set the Date Object</li><li>set a new Account() data object from the Doctrine entity directory</li><li> and then using the entityManager save the data object into the database,</li><li>Then follow-up and clean everything up by clearing the data from the entityManager,</li><li>And finally passing the results back using a Response object</li></ol>";
 
-        return new Response('date:' . $myDate);
+
+        return new Response( $header_text . 'date:' . $myDate . $purpose);
+    }
+
+
+    private function retrieve_header()
+    {
+        return "<h1>Doctrine ORM examples</h1>
+                <ol>
+                    <li><strong>CREATE</strong>
+                        <ol>
+                        <li><a href=\"http://symfony-doctrine.examples.rhim.org/\">Insert Data</a></li>
+                        </ol>
+                    </li>
+                    <li><strong>RETRIEVE</strong>
+                        <ol>
+                        <li><a href=\"http://symfony-doctrine.examples.rhim.org/retrieve_one\">Retrieve One Record (as an object)</a></li>
+                        <li><a href=\"http://symfony-doctrine.examples.rhim.org/retrieve_fields/1\">Retrieve Record Fields by Id</a></li>
+                        </ol>
+                    </li>
+                    <li><strong>UPDATE</strong>
+                        <ol>
+                        <li><a href=\"http://symfony-doctrine.examples.rhim.org/update\">Update Record with timestamp and then redirect</a></li>
+                        </ol>
+                    </li>
+                    <li><strong>DELETE</strong>
+                        <ol>
+                        <li><a href=\"http://symfony-doctrine.examples.rhim.org/delete\">Delete last record</a></li>
+                        </ol>
+                    </li>
+                </ol>";
     }
 
 
@@ -86,7 +118,8 @@ class DefaultController extends Controller
 
                 NOTE: You will see that this entity object uses the DateTime class to hold the data.
         */
-        return new Response('<pre>'.var_export($data, TRUE));
+        //return new Response('<pre>'.var_export($data, TRUE));
+        return new Response($this->retrieve_header() . '<pre>'.var_export($data, TRUE));
 
     }
 
@@ -107,7 +140,8 @@ class DefaultController extends Controller
         }
 
         // Now that we have retrieved the data object we can use the getters to retrieve the data we want.
-        return new Response('The name of the gal who helped steal the Death Star plans was: ' . $data->getFirstName() . ' ' . $data->getLastName());
+        //return new Response('The name of the gal who helped steal the Death Star plans was: ' . $data->getFirstName() . ' ' . $data->getLastName());
+        return new Response($this->retrieve_header() . 'The name of the gal who helped steal the Death Star plans was: ' . $data->getFirstName() . ' ' . $data->getLastName());
 
     }
 
@@ -125,7 +159,8 @@ class DefaultController extends Controller
                 throw $this->createNotFoundException('No data found for this id:' . $id);
             }
 
-                return new Response('The name of the gal who helped steal the Death Star plans was: ' . $acct->getFirstName() . ' ' . $acct->getLastName());
+                //return new Response('The name of the gal who helped steal the Death Star plans was: ' . $acct->getFirstName() . ' ' . $acct->getLastName());
+                return new Response($this->retrieve_header() . 'The name of the gal who helped steal the Death Star plans was: ' . $acct->getFirstName() . ' ' . $acct->getLastName());
     }
 
 
@@ -220,7 +255,8 @@ class DefaultController extends Controller
         $entityManager  = $this->getDoctrine()->getManager();
         $acct           = $entityManager->getRepository('AppBundle:Account')->find($userId);
 
-        return new Response("There first name is now: " . $acct->getFirstName() . " and the modified date is: " . $acct->getModifiedDate()      );
+        //return new Response("There first name is now: " . $acct->getFirstName() . " and the modified date is: " . $acct->getModifiedDate()      );
+        return new Response( $this->retrieve_header() . "There first name is now: " . $acct->getFirstName() . " and the modified date is: " . $acct->getModifiedDate()      );
     }
 
 
@@ -229,17 +265,28 @@ class DefaultController extends Controller
      */
     public function deleteAction()
     {
-        $userId = 2;
 
-        $entityManager  = $this->getDoctrine()->getManager();
-        $acct           = $entityManager->getRepository('AppBundle:Account')->find($userId);
+        $em = $this->getDoctrine()->getManager();
 
-        $entityManager->remove($acct);
+        // First retrieve object
+        $query = $em->createQuery(
+            'SELECT a
+          FROM AppBundle:Account a
+          ORDER BY a.id DESC'
+        );
+        $account = $query->getResult();
+        $lastId  = $account[0]->getId();
+
+        // Then pass id (integer) to retrieve the object we want to delete.
+        $acct           = $em->getRepository('AppBundle:Account')->find($lastId);
+        $em->remove($acct);
 
         // The actual DELETE query, however, isn't actually executed until the flush() method is called.
-        $entityManager->flush();
+        $em->flush();
 
-        return new Response("Delete action taken... It should be deleted from the database.");
+        //return new Response("Delete action taken... It should be deleted from the database.");
+        return new Response($this->retrieve_header() . "Delete action taken on record id#: " . $lastId . " - It should be deleted from the database.");
+
     }
 
 

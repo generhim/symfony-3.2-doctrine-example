@@ -10,17 +10,20 @@ A Symfony project created on December 13, 2016, 8:50 pm.
 
 INSTALLATION CHECKLIST
 #1. Install latest Symfony Installer with the following:
+# -------------------------------------------------------------
 source: http://symfony.com/download
 
     sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
     sudo chmod a+x /usr/local/bin/symfony
 
 #2. Create new project:
+# -------------------------------------------------------------
 source: http://symfony.com/download
 
     symfony new my_project
 
 #3. Change permissions of the /var/cache/ directories:
+# -------------------------------------------------------------
 source: http://symfony.com/doc/current/setup/file_permissions.html
 
     rm -rf var/cache/*
